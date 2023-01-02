@@ -4,9 +4,6 @@ from video_player import Video
 
 def Play(option=1):
     pygame.init()
-    WIDTH, HEIGHT = 1520, 920 
-    SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
-    vol = 0.2
     ## Enter your Video actuall path or relative path
     if(option==1):     
         pygame.display.set_caption("pal tu pal")
@@ -41,13 +38,25 @@ def Play(option=1):
     else:     
         pygame.display.set_caption("Shiv Tandav")
         vid = Video("Video\\Shiv Tandav.mp4")
-    
+
+
     #* play the selected video 
+    WIDTH, HEIGHT = 936, 637
+    # pWIDTH, pHEIGHT = WIDTH, HEIGHT
+    vol = 0.2
+    on_volume = True
+
+    SCREEN = pygame.display.set_mode((WIDTH,HEIGHT),pygame.RESIZABLE)
     while True:
-        vid.set_volume(vol)
+        
+        if(on_volume):
+            vid.set_volume(vol)
+            on_volume=False
         vid.draw(SCREEN, (0, 0))
         vid.set_size((WIDTH, HEIGHT))
         pygame.display.update()
+        WIDTH, HEIGHT = pygame.display.get_window_size()
+        
         
         for event in pygame.event.get():
             if(vid.finish()):
@@ -66,10 +75,6 @@ def Play(option=1):
 		## checking if keydown event happened or not
             if event.type == pygame.KEYDOWN:
 			
-			# checking if key "A" was pressed
-                if event.key == pygame.K_k:
-                    vid.toggle_pause()
-                
                 if event.key == pygame.K_BACKSPACE:
                     vid.close()
                     pygame.quit()
@@ -77,25 +82,44 @@ def Play(option=1):
                     
                 if event.key == pygame.K_r:
                     vid.restart()
+                    on = True
 			
                 if event.key == pygame.K_j:
-                    vid.seek(5)
-                    
+                    vid.seek(-10)
+                if event.key == pygame.K_k or event.key == pygame.K_SPACE:
+                    vid.toggle_pause()    
                 if event.key == pygame.K_l:
-                    vid.seek(-5)
+                    vid.seek(+10)
                 
                 if event.key == pygame.K_h:
                     vol += 0.05
-            
-                if event.key == pygame.K_m:
+                    on_volume =True
+                if event.key == pygame.K_n:
                     vol -= 0.05
-                    
-                if event.key == pygame.K_f:
-                    if((WIDTH,HEIGHT) == (900, 600)):
-                        WIDTH, HEIGHT = 1520, 920
-                    elif((WIDTH,HEIGHT)==(1520, 920)):
-                        WIDTH, HEIGHT = 900, 600
-                    SCREEN = pygame.display.set_mode((WIDTH,HEIGHT))
+                    on_volume = True
+                if event.key == pygame.K_m:
+                    if(vol>0):
+                        vol=0
+                    else:
+                        vol=0.3
+                    on_volume = True
+
 
                 if event.key == pygame.K_o:
                     vid.get_playback_data()
+                    print(pygame.display.get_window_size())
+                    
+                # if event.key == pygame.K_f:       # issue fix on Video player
+                #     if((WIDTH,HEIGHT) != (1536, 937)):
+                #         SCREEN = pygame.display.toggle_fullscreen()
+                #         pWIDTH, pHEIGHT = WIDTH, HEIGHT
+                #         WIDTH, HEIGHT = 1536, 937
+                #     else:
+                #         WIDTH, HEIGHT = pWIDTH, pHEIGHT
+                        
+                    
+                    
+                
+                
+
+                

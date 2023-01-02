@@ -19,7 +19,7 @@ class Video:
             self.frame_delay = 1 / info["frame rate"]
             self.size = info["original size"]
             self.image = pygame.Surface((0, 0))
-                        
+            print(self.size)
             self.active = True
         else:
             raise FileNotFoundError(ENOENT, strerror(ENOENT), path)
@@ -35,12 +35,21 @@ class Video:
                 "original aspect ratio":info.other_display_aspect_ratio[0]}
                 
     def get_playback_data(self):
+        time_of_video = (int)(self.video.get_pts())
+        volume = self.video.get_volume()*100
+        full_length = self.duration
         print("Information of now :: ")
-        # print(self.active)
-        print("Video time :",self.video.get_pts())
-        print("Full time :",self.duration)
-        print("Volume :",self.video.get_volume())
-        # print("Pause :",self.video.get_pause())
+        if(time_of_video>3600):
+            mins = (time_of_video%3600)
+            print("Video time :",(int)(time_of_video/3600),"Hour",(int)(mins/60),"Mins",(mins%60),"Sec")
+        elif(time_of_video>60):
+            print("Video time :",(int)(time_of_video/60),"Mins",(time_of_video%60),"Sec")
+        else:
+            print("Video time ",time_of_video,"Sec")
+        
+        print("Full time :",(int)(full_length/60),"mins",(int)(full_length%60),"sec")
+        print("Volume :",(int)(volume))
+        
         print()
         # return {"active":self.active,
         #         "time":self.video.get_pts(),
@@ -69,9 +78,11 @@ class Video:
         if vid_time + seek_time < self.duration and self.active:
             self.video.seek(seek_time)
             if seek_time < 0:
+                self.video.toggle_pause()
                 while (vid_time + seek_time < self.frames * self.frame_delay):
                     self.frames -= 1
-                
+                self.video.toggle_pause()
+
     def toggle_pause(self):
         self.video.toggle_pause()
         
@@ -94,7 +105,7 @@ class Video:
                 surf.blit(self.image, pos)
     
     def finish(self):
-        if(self.duration <= self.video.get_pts()+5):
+        if(self.duration <= self.video.get_pts()+2):
             return True
         else:
             return False
