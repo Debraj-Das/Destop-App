@@ -8,3 +8,5 @@ __pycache__
 *.class
 *.exe
 *.txt
+*.png
+*.svg

@@ -20,7 +20,7 @@ def openfolder():
     my_img = []
     for i in l:
         my_img.extend(glob.glob(i))
-
+    sorted(my_img)
     img_list = []
     for i in my_img:
         img_list.append(ImageTk.PhotoImage(Image.open(i)))
@@ -32,12 +32,15 @@ def openfolder():
 folder = Button(root, text="Open Folder", command=openfolder)
 folder.grid(row=2, column=1)
 os.chdir("C:\\Users\\debra\\Pictures")
+
+
 # For image use PhotoImage for GUI application
 l = ["*.jpg", "*.jfif", "*.png"]
 my_img = []
 for i in l:
     my_img.extend(glob.glob(i))
 
+sorted(my_img)
 
 img_list = []
 for i in my_img:

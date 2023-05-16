@@ -39,13 +39,12 @@ def Play(option=1):
         pygame.display.set_caption("Shiv Tandav")
         vid = Video("Video\\Shiv Tandav.mp4")
 
-
-    #* play the selected video 
+    # * play the selected video 
     WIDTH, HEIGHT = 936, 637
     # pWIDTH, pHEIGHT = WIDTH, HEIGHT
     vol = 0.2
     on_volume = True
-
+    maxsize = pygame.display.list_modes()[0]
     SCREEN = pygame.display.set_mode((WIDTH,HEIGHT),pygame.RESIZABLE)
     while True:
         
@@ -108,6 +107,16 @@ def Play(option=1):
                 if event.key == pygame.K_o:
                     vid.get_playback_data()
                     print(pygame.display.get_window_size())
+                    
+                if event.key == pygame.K_f:
+                    if((WIDTH,HEIGHT) != (1536, 937)):
+                        SCREEN = pygame.display.set_mode(maxsize,pygame.FULLSCREEN,pygame.RESIZABLE)
+                        WIDTH, HEIGHT = pygame.display.get_window_size()
+                    else:
+                        SCREEN = pygame.display.set_mode(936, 637)
+                        WIDTH, HEIGHT = pygame.display.get_window_size()
+                        
+
                     
                 # if event.key == pygame.K_f:       # issue fix on Video player
                 #     if((WIDTH,HEIGHT) != (1536, 937)):

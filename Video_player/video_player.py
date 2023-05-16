@@ -4,8 +4,6 @@ from ffpyplayer.player import MediaPlayer
 from os.path import exists, basename, splitext
 from os import strerror
 from errno import ENOENT
-
-
 class Video:
     def __init__(self, path):
         self.path = path
@@ -49,7 +47,7 @@ class Video:
         
         print("Full time :",(int)(full_length/60),"mins",(int)(full_length%60),"sec")
         print("Volume :",(int)(volume))
-        
+        print("Size : ",self.size)
         print()
         # return {"active":self.active,
         #         "time":self.video.get_pts(),
