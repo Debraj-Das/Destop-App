@@ -4,7 +4,7 @@ import glob
 #* push the changes to the remote repository
 
 # / message for the commit
-commit_message = "Web Scraping project for scraping the data from the website and storing it in the database"
+commit_message = "Completed the Web Scraping the codeforces"
 
 
 # commit and push the changes to the remote repository

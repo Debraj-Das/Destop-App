@@ -1,5 +1,5 @@
 import pygame, sys
-from pymediainfo import MediaInfo
+import MediaInfo
 from ffpyplayer.player import MediaPlayer
 from os.path import exists, basename, splitext
 from os import strerror

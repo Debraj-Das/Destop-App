@@ -1,0 +1,26 @@
+@ECHO OFF
+
+if EXIST "Give any awkward and large name" goto UNLOCK
+
+if NOT EXIST "Directory/file name" goto make_new_dir
+
+ren "Directory/file name" "Give any awkward and large name"
+attrib +h +s +r "Give any awkward and large name"
+goto End
+
+
+:UNLOCK
+echo Enter password to Unlock Your Secure Folder
+set/p "pass=>> "
+if NOT %pass%== Enter_Your_Password goto End
+
+attrib -h -s -r "Give any awkward and large name"
+ren "Give any awkward and large name" "Directory/file name"
+goto End
+
+
+:make_new_dir
+md "Directory/file name"
+goto End
+
+:End
