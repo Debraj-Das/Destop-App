@@ -1,9 +1,0 @@
-Magic Powder - 2                    
-
-https://codeforces.com/problemset/problem/670/D2
-
-binary search
-
-1500
-
-The term of this problem is the same as the previous one, the only exception — increased restrictions.

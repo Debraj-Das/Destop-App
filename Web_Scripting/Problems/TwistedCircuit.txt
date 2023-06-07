@@ -1,9 +1,0 @@
-Twisted Circuit                    
-
-https://codeforces.com/problemset/problem/784/E
-
-*special problem
-
-2000
-
-  

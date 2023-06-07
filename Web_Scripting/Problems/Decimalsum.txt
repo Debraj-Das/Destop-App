@@ -1,9 +1,0 @@
-Decimal sum                    
-
-https://codeforces.com/problemset/problem/130/C
-
-*special problem
-
-1500
-
-You are given an array of integer numbers. Calculate the sum of its elements.
